@@ -247,7 +247,11 @@ struct Index {
                 .key('Index_TextInput_copies')
                 .onChange((value: string) => {
                   Log.info(TAG, 'copies onChange value:' + value)
-                  this.printCount = Number.parseInt(value)
+                  if (/^\d+$/.test(value)) {
+                    this.printCount = Number.parseInt(value, 10)
+                  } else {
+                    this.printCount = Number.NaN
+                  }
                   this.printCountStr = value//规避前置0输入
                   this.printCountStr = this.printCount.toString()
                   Log.info(TAG, 'copies onChange printCount:' + this.printCount)
@@ -455,7 +459,11 @@ struct Index {
                   })
                   .backgroundColor(Color.White)
                   .onChange((value: string) => {
-                    this.startPage = Number.parseInt(value)
+                    if (/^\d+$/.test(value)) {
+                      this.startPage = Number.parseInt(value, 10)
+                    } else {
+                      this.startPage = Number.NaN
+                    }
                     this.startPageStr = value//规避前置0输入
                     this.startPageStr = this.startPage.toString()
                     Log.info(TAG, 'from change; value = ' + this.startPage + ' endpage = ' + this.endPage)
@@ -518,7 +526,11 @@ struct Index {
                     color: $r('app.color.border_line')
                   })
                   .onChange((value: string) => {
-                    this.endPage = Number.parseInt(value)
+                    if (/^\d+$/.test(value)) {
+                      this.endPage = Number.parseInt(value, 10)
+                    } else {
+                      this.endPage = Number.NaN
+                    }
                     this.endPageStr = value//规避前置0输入
                     this.endPageStr = this.endPage.toString()
                     if (this.endPage > this.totalPage) {
