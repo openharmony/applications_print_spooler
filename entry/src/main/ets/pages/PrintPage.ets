@@ -1684,8 +1684,12 @@ struct Index {
       this.setInvalidRange()
       return
     }
-    let num = Number(numStr)
-    if (Number.isNaN(num)||num < 1){
+    if (!/^\d+$/.test(numStr)) {
+      this.setInvalidRange()
+      return undefined
+    }
+    let num = Number.parseInt(numStr, 10)
+    if (num < 1){
       this.setInvalidRange()
       return undefined
     }else if (num > this.totalPage) {
